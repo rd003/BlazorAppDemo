@@ -23,7 +23,7 @@
         </div>
         
         <div class="col-md-8">
-            <Filters OnSelectDate="HandleSelectDate"></Filters>
+            <Filters OnSelectDate="HandleSelectDate" OnLoadAll="HandleLoadAll"></Filters>
             <ActivityList OnEdit="HandleEdit" OnDelete="HandleDelete" Activities="@activities"></ActivityList>
         </div>
     </div>

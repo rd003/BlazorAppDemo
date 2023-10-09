@@ -100,7 +100,7 @@ public partial class ManageActivity
         }
     }
 
-    async Task HandleEdit(
+    void HandleEdit(
         BlazorAppDemo.DataAccess.Models.Activity submitedActivity)
     {
         activity = submitedActivity;
@@ -115,14 +115,20 @@ public partial class ManageActivity
 
     }
 
-    void HandleSelectDate(FilterModel filters)
+    async Task HandleSelectDate(FilterModel filters)
     {
         var startDate = filters.StartDate;
         var endDate = filters.EndDate;
-        // if(startDate!=null & endDate!=null)
-        // {
-
-        // }
+        if (startDate != null & endDate != null)
+        {
+            await LoadActivities(filters.StartDate, filters.EndDate);
+        }
         // Console.WriteLine($"sDate=${startDate}, eDate=${endDate}");
     }
+
+    void HandleLoadAll()
+    {
+        // await LoadActivities();
+    }
+
 }

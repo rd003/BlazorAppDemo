@@ -10,6 +10,10 @@
         <button type="button" @onclick="selectDate" class="btn btn-info">
             Search
         </button>
+
+         <button type="button" @onclick="()=>OnLoadAll.Invoke()" class="btn btn-secondary">
+            Search
+        </button>
     </div> 
 
 </div>
@@ -20,6 +24,8 @@
 
     [Parameter]
     public EventCallback<FilterModel> OnSelectDate{ get; set; }
+    [Parameter]
+    public Action OnLoadAll { get; set; }
     async Task selectDate()
     {
         var filter = new FilterModel
