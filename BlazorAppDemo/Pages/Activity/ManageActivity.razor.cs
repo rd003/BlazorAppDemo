@@ -126,9 +126,9 @@ public partial class ManageActivity
         // Console.WriteLine($"sDate=${startDate}, eDate=${endDate}");
     }
 
-    void HandleLoadAll()
+    async Task HandleLoadAll()
     {
-        // await LoadActivities();
+        await LoadActivities();
     }
 
 }

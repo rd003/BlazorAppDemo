@@ -16,7 +16,7 @@
 
     <div class="mb-3">
         <button type="submit" class="btn btn-info">Save</button>
-        <button type="button" @onclick="HandleReset" class="btn btn-primary">Reset</button>
+        <button type="button" @onclick="()=> OnFormReset?.Invoke()" class="btn btn-primary">Reset</button>
     </div>
 </EditForm>
 
@@ -35,8 +35,5 @@
         await this.OnFormSubmit.InvokeAsync(activity);
     }
 
-    void HandleReset()
-    {
-        OnFormReset?.Invoke();
-    }
+    
 }
