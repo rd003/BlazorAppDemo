@@ -1,0 +1,36 @@
+﻿<div class="row mb-2">
+    <div class="col-md-4">
+        <input type="date" @bind="startDate" class="form-control"/>
+    </div>
+    <div class="col-md-4">
+        <input type="date" class="form-control" @bind="endDate"/>
+    </div>
+
+     <div class="col-md-4">
+        <button type="button" @onclick="selectDate" class="btn btn-info">
+            Search
+        </button>
+    </div> 
+
+</div>
+
+@code {
+    DateTime? startDate;
+    DateTime? endDate;
+
+    [Parameter]
+    public EventCallback<FilterModel> OnSelectDate{ get; set; }
+    async Task selectDate()
+    {
+        var filter = new FilterModel
+            {
+                StartDate = startDate,
+                EndDate = endDate
+            };
+        await OnSelectDate.InvokeAsync(filter);
+        startDate = null;
+        endDate = null;
+    }
+
+
+}

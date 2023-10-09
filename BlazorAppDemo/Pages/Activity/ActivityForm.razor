@@ -1,0 +1,42 @@
+﻿<EditForm Model="@activity" OnSubmit="HandleSubmit">
+    <input type="hidden" @bind=activity.Id /> 
+    <div class="mb-3">
+        <label>Activity Date</label>
+        <input type="date" @bind=activity.ActivityDate  class="form-control" />
+    </div>
+    <div class="mb-3">
+        <label>Hour(s) </label>
+        <input @bind=activity.TotalHours class="form-control" placeholder="1 or 1.x" />
+    </div>
+
+    <div class="mb-3">
+        <label>Description</label>
+        <textarea @bind=activity.Description class="form-control"></textarea>
+    </div>
+
+    <div class="mb-3">
+        <button type="submit" class="btn btn-info">Save</button>
+        <button type="button" @onclick="HandleReset" class="btn btn-primary">Reset</button>
+    </div>
+</EditForm>
+
+@code {
+    [Parameter]
+    public EventCallback<DataAccess.Models.Activity> OnFormSubmit { get; set; }
+
+    [Parameter]
+    public DataAccess.Models.Activity activity { get; set; }
+
+    [Parameter]
+    public Action OnFormReset { get; set; }
+
+    async Task HandleSubmit()
+    {
+        await this.OnFormSubmit.InvokeAsync(activity);
+    }
+
+    void HandleReset()
+    {
+        OnFormReset?.Invoke();
+    }
+}

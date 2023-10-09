@@ -1,0 +1,33 @@
+﻿@page "/activity"
+
+<div style="padding:20px 15px;">
+    <h3>Manage Activities</h3>
+
+    <div class="row">
+        <div class="col-md-4">
+            @if(state==(int)States.Pending)
+            {
+               <Spinner></Spinner>
+            }
+            @if (state == (int)States.Error && message.Length>0)
+            {
+                <Alert Message="@message" CssClass="alert-danger"></Alert>
+            }
+
+            @if (state == (int)States.Completed && message.Length > 0)
+            {
+                <Alert Message="@message" CssClass="alert-success"></Alert>
+
+            }
+            <ActivityForm activity="activity" OnFormReset="HandleFormReset" OnFormSubmit="HandleSubmit"></ActivityForm>
+        </div>
+        
+        <div class="col-md-8">
+            <Filters OnSelectDate="HandleSelectDate"></Filters>
+            <ActivityList OnEdit="HandleEdit" OnDelete="HandleDelete" Activities="@activities"></ActivityList>
+        </div>
+    </div>
+
+</div>
+
+
