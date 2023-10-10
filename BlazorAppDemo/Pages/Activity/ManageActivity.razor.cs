@@ -87,6 +87,7 @@ public partial class ManageActivity
             bool result = await JSRuntime.InvokeAsync<bool>("confirm", "Are you sure to delete??");
             if (result)
             {
+                message = "deleted successfully";
                 await activityRepos.DeleteActivityAsync(activityToDelete.Id);
                 activities.Remove(activityToDelete);
                 state = (int)States.Completed;
@@ -109,10 +110,10 @@ public partial class ManageActivity
 
     void HandleFormReset()
     {
-        activity.ActivityDate = DateTime.UtcNow;
-        activity.TotalHours = 0;
-        activity.Description = "";
-
+        activity = new DataAccess.Models.Activity
+        {
+            ActivityDate = DateTime.UtcNow
+        };
     }
 
     async Task HandleSelectDate(FilterModel filters)
@@ -123,12 +124,12 @@ public partial class ManageActivity
         {
             await LoadActivities(filters.StartDate, filters.EndDate);
         }
-        // Console.WriteLine($"sDate=${startDate}, eDate=${endDate}");
     }
 
-    async Task HandleLoadAll()
+    async void HandleLoadAll()
     {
         await LoadActivities();
+        StateHasChanged();
     }
 
 }

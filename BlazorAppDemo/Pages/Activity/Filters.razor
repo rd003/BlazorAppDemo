@@ -11,8 +11,8 @@
             Search
         </button>
 
-         <button type="button" @onclick="()=>OnLoadAll.Invoke()" class="btn btn-secondary">
-            Search
+         <button type="button" @onclick="HandleLoadAll" class="btn btn-secondary">
+            All
         </button>
     </div> 
 
@@ -34,9 +34,13 @@
                 EndDate = endDate
             };
         await OnSelectDate.InvokeAsync(filter);
+       
+    }
+
+    void HandleLoadAll()
+    {
+        OnLoadAll.Invoke();
         startDate = null;
         endDate = null;
     }
-
-
 }
