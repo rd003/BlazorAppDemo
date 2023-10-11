@@ -9,5 +9,6 @@ namespace BlazorAppDemo.DataAccess.Repositories
         Task FindActivityByIdAsync(int id);
         Task<IEnumerable<Activity>> GetAllActivitiesAsync(DateTime? startDate = null, DateTime? endDate = null);
         Task UpdateActivityAsync(Activity activity);
+        Task<bool> IsActivityDateExists(DateTime activityDate, int id);
     }
 }

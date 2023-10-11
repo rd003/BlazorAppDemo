@@ -33,18 +33,25 @@ public partial class ManageActivity
         try
         {
             state = (int)States.Pending;
-            if (activity.Id == 0)
+            bool isActivityDateExists = await activityRepos.IsActivityDateExists(activity.ActivityDate, activity.Id);
+            if (isActivityDateExists)
             {
-                await activityRepos.AddActivityAsync(activity);
-                activities.Add(activity);
+                state = (int)States.Error;
+                message = "This activity date already exists,please select different one.";
             }
             else
             {
-                await activityRepos.UpdateActivityAsync(activity);
+                if (activity.Id == 0)
+                {
+                    await activityRepos.AddActivityAsync(activity);
+                    activities.Add(activity);
+                }
+                else
+                    await activityRepos.UpdateActivityAsync(activity);
+                message = "Saved successfully";
+                state = (int)States.Completed;
+                HandleFormReset();
             }
-            message = "Saved successfully";
-            state = (int)States.Completed;
-            HandleFormReset();
         }
         catch (Exception ex)
         {
