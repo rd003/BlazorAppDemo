@@ -1,23 +1,30 @@
-﻿<EditForm Model="@activity" OnSubmit="HandleSubmit">
-    <input type="hidden" @bind=activity.Id /> 
+﻿<EditForm Model="@activity" OnValidSubmit="HandleSubmit">
+     <DataAnnotationsValidator />  
+     <input type="hidden" @bind=activity.Id /> 
     <div class="mb-3">
-        <label>Activity Date</label>
+        <label>Activity Date*</label>
         <input type="date" @bind=activity.ActivityDate  class="form-control" />
+        <ValidationMessage class="text-danger" For="()=>activity.ActivityDate"/>
     </div>
     <div class="mb-3">
-        <label>Hour(s) </label>
+        <label>Hour(s)* </label>
         <input @bind=activity.TotalHours class="form-control" placeholder="1 or 1.x" />
+        <ValidationMessage class="text-danger" For="()=>activity.TotalHours"/>
     </div>
 
     <div class="mb-3">
-        <label>Description</label>
+        <label>Description*</label>
         <textarea @bind=activity.Description class="form-control"></textarea>
+        <ValidationMessage class="text-danger" For="()=>activity.Description"/>
+
     </div>
 
     <div class="mb-3">
         <button type="submit" class="btn btn-info">Save</button>
         <button type="button" @onclick="()=> OnFormReset?.Invoke()" class="btn btn-primary">Reset</button>
     </div>
+
+    
 </EditForm>
 
 @code {

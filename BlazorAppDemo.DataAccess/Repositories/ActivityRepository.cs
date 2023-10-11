@@ -65,5 +65,4 @@ public class ActivityRepository : IActivityRepository
         var activityId = await connection.QueryFirstOrDefaultAsync<int>(sql, new { activityDate, id });
         return activityId > 0;
     }
-
 }

@@ -121,6 +121,7 @@ public partial class ManageActivity
         {
             ActivityDate = DateTime.UtcNow
         };
+        StateHasChanged();
     }
 
     async Task HandleSelectDate(FilterModel filters)
